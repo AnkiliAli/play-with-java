@@ -7,7 +7,9 @@ import java.util.regex.Pattern;
 public class PlayWithNumber {
 
     public static boolean isNumberInTable(int[] ints, int k) {
-        int minIndex = 0, l = ints.length, maxIndex = l - 1;
+        int minIndex = 0;
+        int l = ints.length;
+        int maxIndex = l - 1;
         if (k < ints[minIndex] || k > ints[maxIndex])
             return false;
         do {
@@ -19,9 +21,7 @@ public class PlayWithNumber {
                 return true;
             l = maxIndex - minIndex + 1;
         } while (l > 2);
-        if (ints[maxIndex] == k || ints[minIndex] == k)
-            return true;
-        return false;
+        return ints[maxIndex] == k || ints[minIndex] == k;
     }
 
     public static int theLittleAbsoluteValue(int[] ints) {
@@ -32,7 +32,8 @@ public class PlayWithNumber {
             return ints[0];
         if (ints[ints.length - 1] < 0)
             return ints[ints.length - 1];
-        int maxNegValue = 0, minPosValue = 0;
+        int maxNegValue = 0;
+        int minPosValue = 0;
         for (int i : ints) {
             if (i < 0) {
                 maxNegValue = i;
@@ -48,7 +49,6 @@ public class PlayWithNumber {
 
     public String encodePlainText(String plainTest) {
         StringBuilder str = new StringBuilder();
-        // TODO: Implement the encoding logic here
         while (!plainTest.isEmpty()) {
             String c = plainTest.substring(0, 1);
             String miniCode = extractCharCode(plainTest, c);
@@ -58,14 +58,69 @@ public class PlayWithNumber {
         return str.toString();
     }
 
+    public boolean addUpTo(int[] numbers, int k) {
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = i + 1; j < numbers.length; j++) {
+                if (numbers[i] + numbers[j] == k) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // 26/ 01/ 25
     private String extractCharCode(String plainTest, String c) {
-        // TODO Auto-generated method stub
         Pattern pattern = Pattern.compile(c);
         Matcher matcher = pattern.matcher(plainTest);
         int size = 0;
         while (matcher.find()) {
             size += matcher.group().length();
         }
-        return String.valueOf(size) + c;
+        return size + c;
+    }
+
+    // 27/ 01/ 25
+    public int[] productOfAllExceptI(int[] numbers) {
+        int product = Arrays.stream(numbers).reduce(1, (a, b) -> a * b);
+        return Arrays.stream(numbers).map(i -> product / i).toArray();
+    }
+
+    // 28/ 01/ 25
+    public int findTheLowestPositiveInteger(int[] numbers1) {
+        int[] postNumber = Arrays.stream(numbers1)
+                .filter(i -> i > 0).sorted().toArray();
+        if (postNumber.length == 0) {
+            return 1;
+        }
+        int lowPos = 0;
+        for (int posNumber : postNumber) {
+            lowPos++;
+            if (lowPos < posNumber)
+                return lowPos;
+        }
+        return ++lowPos;
+    }
+
+    // 29/ 01/ 25
+    public String cons(int a, int b) {
+        return a+","+b;
+    }
+
+    public int car(String pair) {
+        checkIfThePairIsCorrect(pair);
+        return Integer.parseInt(pair.split(",")[0]);
+    }
+
+    private void checkIfThePairIsCorrect(String pair) {
+        Pattern pattern = Pattern.compile("\\d,\\d");
+        Matcher matcher = pattern.matcher(pair);
+        if(!matcher.find())
+            throw new IllegalArgumentException("Pair Incorrect");
+    }
+
+    public int cdr(String pair) {
+        checkIfThePairIsCorrect(pair);
+        return Integer.parseInt(pair.split(",")[1]);
     }
 }
