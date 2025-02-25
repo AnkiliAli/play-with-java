@@ -31,11 +31,19 @@ class TreeNodeServiceTest {
     }
 
     @Test
+    void shouldTestSerializeDFSNode(){
+        String expected =
+                "1;2;4;-;-;5;0;6;-;-;-;4;-;-;3;9;-;-;18;5;9;-;-;7;-;-;17;-;-;";
+        //Do
+        String result = treeNodeService.serializeDFS(root);
+        Assertions.assertEquals(expected,result,"wrong serialization");
+    }
+    @Test
     void shouldTestSerializeNode(){
         String expected =
                 "1;2;4;-;-;5;0;6;-;-;-;4;-;-;3;9;-;-;18;5;9;-;-;7;-;-;17;-;-;";
         //Do
-        String result = treeNodeService.serialize(root);
+        String result = treeNodeService.serializeBFS(root);
         Assertions.assertEquals(expected,result,"wrong serialization");
     }
 }
