@@ -3,7 +3,6 @@ package com.anktech.pwjproject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.anktech.pwjproject.PlayWithNumber;
 
 class PlayWithNumberTest {
 
@@ -43,6 +42,7 @@ class PlayWithNumberTest {
         // Assertions
         Assertions.assertArrayEquals(expected, result);
     }
+
     @Test
     void shouldFindTheLowestPositiveInteger() {
         // Given
@@ -61,42 +61,45 @@ class PlayWithNumberTest {
 
     @Test
     void shouldTestConstructionPairOfNumber() {
-        //Given
+        // Given
         int a = 5, b = 6;
         String expected = "5,6";
-        //Do
-        String result = playWithNumber.cons(a,b);
-        //Assertion
-        Assertions.assertEquals(expected,result);
+        // Do
+        String result = playWithNumber.cons(a, b);
+        // Assertion
+        Assertions.assertEquals(expected, result);
     }
+
     @Test
-    void shouldTestIfThePairIsCorrect(){
-        //Given
+    void shouldTestIfThePairIsCorrect() {
+        // Given
         String pair = ",90";
 
-        //Do
-        Exception exception = Assertions.assertThrows( IllegalArgumentException.class,()->playWithNumber.car(pair));
+        // Do
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> playWithNumber.car(pair));
         String expectedMessage = "Pair Incorrect";
-        Assertions.assertEquals(expectedMessage,exception.getMessage());
+        Assertions.assertEquals(expectedMessage, exception.getMessage());
     }
+
     @Test
-    void shouldTestCar(){
-        //Given
+    void shouldTestCar() {
+        // Given
         String pair = "5,6";
         int expected = 5;
-        //Do
+        // Do
         int result = playWithNumber.car(pair);
-        //Assertion
-        Assertions.assertEquals(expected,result);
+        // Assertion
+        Assertions.assertEquals(expected, result);
     }
+
     @Test
-    void shouldTestCdr(){
-        //Given
+    void shouldTestCdr() {
+        // Given
         String pair = "5,6";
         int expected = 6;
-        //Do
+        // Do
         int result = playWithNumber.cdr(pair);
-        //Assertion
-        Assertions.assertEquals(expected,result);
+        // Assertion
+        Assertions.assertEquals(expected, result);
     }
 }

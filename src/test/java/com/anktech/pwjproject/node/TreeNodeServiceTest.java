@@ -45,4 +45,13 @@ class TreeNodeServiceTest {
                 String result = treeNodeService.serializeDFS(root);
                 Assertions.assertEquals(expected, result, "wrong serialization");
         }
+
+        @Test
+        void shouldTestDeSerializeNodeFromString() {
+                // GIVEN
+                String nodeStringValues = "1;2;3;4;5;9;18;-;-;0;4;-;-;5;17;6;-;-;-;9;7;-;-;-;-;-;-;-;-;";
+                TreeNode result = treeNodeService.deserializeNodeFromString(nodeStringValues);
+                String stringVlues = treeNodeService.serializeBFS(result);
+                Assertions.assertEquals(nodeStringValues, stringVlues);
+        }
 }
